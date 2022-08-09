@@ -1,0 +1,7 @@
+<%= form_with url:  "/discounts/#{@discount.id}", method: :patch, local: true  do |form| %>
+  <%= form.label :precent %>
+  <%= form.text_field :precent %>
+  <%= form.label :amount %>
+  <%= form.text_field :amount %>
+  <%= form.submit "Update Discount" %>
+<% end %>
