@@ -29,4 +29,11 @@ class DiscountsController < ApplicationController
     @discount = Discount.find(params[:id])
   end
 
+  def update
+    discount = Discount.find(params[:id])
+     discount.update(precent: params[:precent],
+                          amount: params[:amount])
+    redirect_to "/discounts/#{discount.id}"
+  end
+
 end

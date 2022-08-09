@@ -71,6 +71,17 @@ RSpec.describe 'Discounts Show Page' do
     discount3 = Discount.create!(precent: 5.00, amount: 3 ,merchant_id: merchant2.id)
 
     visit "/discounts/#{discount1.id}/edit"
-    
+
+    fill_in('precent', with: '55')
+    fill_in('amount', with: '27')
+
+    click_button 'Update Discount'
+
+    expect(current_path).to eq("/discounts/#{discount1.id}")
+    expect(page).to have_content(55)
+    expect(page).to have_content(27)
+    expect(page).to_not have_content(20)
+    expect(page).to_not have_content(10)
+
   end
 end
