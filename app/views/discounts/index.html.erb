@@ -1,0 +1,14 @@
+Z <%=link_to "Create A New Discount", "/discounts/new" %>
+ <h1> Discounts Index Page </h1>
+
+ <div id='discounts'>
+  <% @discounts.each do |discount| %>
+  <div id="discount-<%= discount.id %>">
+       <h3>Merchant Discount
+       Discount Precent <%= discount.precent %>%.
+      <%= discount.amount %> Items needed for discount
+      <%=link_to "View Discount", "/discounts/#{discount.id}" %>
+      <%=link_to "Delete Discount", "/discounts/#{discount.id}", method: :delete %> </h3>
+    </div>
+  <% end  %>
+</div>

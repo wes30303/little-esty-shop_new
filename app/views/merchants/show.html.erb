@@ -6,6 +6,7 @@
 
 <h4><%=link_to "#{@merchant.name}'s Item Index", "/merchants/#{@merchant.id}/items" %></h4>
 <h4><%=link_to "#{@merchant.name}'s Invoice Index", "/merchants/#{@merchant.id}/invoices" %></h4>
+<h4><%=link_to "#View All Discounts", "/discounts" %></h4>
 
 <h2>Top 5 Customers by Total Number of Succesful Transactions:</h2>
   <% @merchant.customers.top_five_by_transaction_count.each do |customer| %>
@@ -15,7 +16,7 @@
 <div id="items-ready-to-ship">
 <h2>Items ready to ship</h2>
   <% @merchant.items_ready_to_ship.each do |invoice_item| %>
-    <p><%= invoice_item.item.name %> 
+    <p><%= invoice_item.item.name %>
     <br>
     <%= invoice_item.invoice.created_at.strftime("Date invoice created: %A, %B %d, %Y") %>
     </p>
