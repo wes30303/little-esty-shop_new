@@ -11,19 +11,22 @@
 
 <div id="revenue">
   <h3>Total Revenue: <%="#{@invoice.total_revenue(@merchant.id)}" %></h3>
+  <h1>Total Discount Revenue: <%= "#{@invoice.dis_revenue(@merchant.id)}" %></h1>
 </div>
 
 <div id="invoice">
   <% @invoice.invoice_items.each do |invoice| %>
-  <%= invoice.item.id %>
+  <% if invoice.top_discount %>
+        <%= link_to 'View Discount', "/discounts/#{invoice.top_discount.id}" %>
+    <% end %>
     <% if @merchant.items.include?(invoice.item) %>
       <p>Name: <%= invoice.item.name %></p>
       <p>Quantity: <%= invoice.quantity %></p>
       <p>Price: <%= invoice.unit_price %></p>
       <p>Status: <%= invoice.status %></p>
       <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :post, local: true do |form| %>
-      <%= form.select :status, options_for_select(InvoiceItem.statuses.map {|k, v| [k.capitalize, k.capitalize] }, selected: "#{invoice.status.capitalize}" ) %> 
-      <%= hidden_field_tag "invoice_item_id", invoice.id %> 
+      <%= form.select :status, options_for_select(InvoiceItem.statuses.map {|k, v| [k.capitalize, k.capitalize] }, selected: "#{invoice.status.capitalize}" ) %>
+      <%= hidden_field_tag "invoice_item_id", invoice.id %>
       <%= form.submit 'Update Item Status' %>
       <% end %>
     <% end %>
@@ -38,5 +41,3 @@
 </div>
 
 </div>
-
-

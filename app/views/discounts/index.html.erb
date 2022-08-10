@@ -1,6 +1,6 @@
-Z <%=link_to "Create A New Discount", "/discounts/new" %>
+<%= render partial: "discounts/holiday" %>
  <h1> Discounts Index Page </h1>
-
+ <%=link_to "Create A New Discount", "/discounts/new" %>
  <div id='discounts'>
   <% @discounts.each do |discount| %>
   <div id="discount-<%= discount.id %>">

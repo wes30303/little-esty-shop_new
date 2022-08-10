@@ -30,7 +30,7 @@ RSpec.describe 'Discounts index Index' do
     discount2 = Discount.create!(precent: 10.00, amount: 5, merchant_id: merchant1.id)
     discount3 = Discount.create!(precent: 5.00, amount: 3 ,merchant_id: merchant2.id)
 
-    visit '/discounts'
+    visit "/discounts"
 
     click_link 'Create A New Discount'
 
@@ -52,6 +52,7 @@ RSpec.describe 'Discounts index Index' do
     expect(page).to have_content(40)
     expect(page).to have_content(55)
   end
+
   it "is able to Delete discount" do
     merchant1 = Merchant.create!(name: "Poke Retirement homes")
     merchant2 = Merchant.create!(name: "Happy Place ")

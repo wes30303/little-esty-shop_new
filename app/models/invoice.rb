@@ -7,6 +7,7 @@ class Invoice < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_many :items, through: :invoice_items
   has_many :merchants, through: :items
+  has_many :discounts, through: :merchants
 
   validates_presence_of :status
 
@@ -23,4 +24,17 @@ class Invoice < ApplicationRecord
     .distinct
     .order(:created_at)
   end
+
+  def dis_revenue(merchant_id)
+    if discounts
+      invoice_items.joins(item: :merchant)
+      .where(merchants:{ id: merchant_id })
+      .sum(&:dis_revenue)
+    end
+  end
+
+  def invoice_discount_revenue
+    invoice_items.joins(:item).sum(&:dis_revenue).to_i
+  end
+
 end
